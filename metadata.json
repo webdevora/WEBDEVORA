@@ -1,0 +1,9 @@
+{
+  "name": "Remix: Remix: WebDevora",
+  "description": "A futuristic, high-performance full-stack web application with premium UI/UX, GSAP animations, and integrated payment systems.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

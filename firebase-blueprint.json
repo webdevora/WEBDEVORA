@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile information including role and metadata.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique identifier for the user." },
+        "name": { "type": "string", "description": "The user's full name." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "role": { "type": "string", "enum": ["admin", "customer"], "description": "The user's role in the application." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user profile was created." }
+      },
+      "required": ["uid", "name", "email", "role"]
+    },
+    "Payment": {
+      "title": "Payment Transaction",
+      "description": "Details of a payment submission by a customer.",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string", "description": "Name of the customer who paid." },
+        "phone": { "type": "string", "description": "Customer's phone number." },
+        "amount": { "type": "number", "description": "Amount paid in INR." },
+        "method": { "type": "string", "enum": ["UPI", "GPay", "Razorpay", "Stripe"], "description": "Payment method used." },
+        "screenshot": { "type": "string", "description": "URL or base64 of the transaction screenshot." },
+        "status": { "type": "string", "enum": ["Paid", "Pending", "Verified"], "description": "Current status of the payment." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the payment was submitted." },
+        "authorUid": { "type": "string", "description": "UID of the user who submitted the payment." }
+      },
+      "required": ["customerName", "phone", "amount", "method", "screenshot", "status", "authorUid"]
+    },
+    "Contact": {
+      "title": "Contact Message",
+      "description": "A message sent via the contact form.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the sender." },
+        "email": { "type": "string", "format": "email", "description": "Email of the sender." },
+        "message": { "type": "string", "description": "The message content." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the message was sent." }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Work": {
+      "title": "Portfolio Work",
+      "description": "A project showcased in the portfolio.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the project." },
+        "category": { "type": "string", "description": "Project category (e.g., Web Design)." },
+        "image": { "type": "string", "description": "URL of the project image." },
+        "link": { "type": "string", "description": "Link to the live project or case study." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the project was added." }
+      },
+      "required": ["title", "category", "image", "link"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Payment submission documents."
+    },
+    "/contacts/{contactId}": {
+      "schema": "Contact",
+      "description": "Contact form message documents."
+    },
+    "/works/{workId}": {
+      "schema": "Work",
+      "description": "Portfolio work documents."
+    }
+  }
+}
